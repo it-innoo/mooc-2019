@@ -21,7 +21,7 @@ public class Lehma implements Eleleva, Lypsava {
         "Rima", "Soma", "Sylkki", "Valpu", "Virpi"};
     
     private final String nimi;
-    private double saldo;
+    private double maara;
     private double tilavuus;
     
     public Lehma() {
@@ -31,7 +31,7 @@ public class Lehma implements Eleleva, Lypsava {
     public Lehma(String nimi) {
         this.nimi = nimi;
         this.tilavuus = 15 + new Random().nextInt(26);
-        this.saldo = 0;
+        this.maara = 0;
     }
 
     public String getNimi() {
@@ -43,27 +43,27 @@ public class Lehma implements Eleleva, Lypsava {
     }
 
     public double getMaara() {
-        return saldo;
+        return maara;
     }
 
     @Override
     public void eleleTunti() {
-         saldo += 0.7 + (2 - 0.7) * new Random().nextDouble();
-        if (saldo > tilavuus) {
-            saldo = tilavuus;
+        maara += 0.7 + (2 - 0.7) * new Random().nextDouble();
+        if (maara > tilavuus) {
+            maara = tilavuus;
         }
     }
 
     @Override
     public double lypsa() {
-        double lypsetty = this.saldo;
-        this.saldo = 0;
+        double lypsetty = this.maara;
+        this.maara = 0;
         return lypsetty;
     }
 
     @Override
     public String toString() {
-        return nimi + " " + Math.ceil(saldo) + "/" + tilavuus;
+        return nimi + " " + Math.ceil(maara) + "/" + tilavuus;
     }
     
 }
