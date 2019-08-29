@@ -1,10 +1,11 @@
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 
 public class Taikanelio {
 
-    private int[][] nelio;
+    private final int[][] nelio;
 
     // valmis konstruktori
     public Taikanelio(int koko) {
@@ -17,15 +18,52 @@ public class Taikanelio {
 
     // toteuta nämä kolme metodia
     public ArrayList<Integer> rivienSummat() {
-        return new ArrayList<>();
+        ArrayList<Integer> rivienSummat = new ArrayList<>();
+        
+        for (int rivi = 0; rivi < nelio.length; rivi++) {
+            int summa = 0;
+            for (int sarake = 0; sarake < nelio.length; sarake++) {
+                summa += nelio[rivi][sarake];
+            }
+            rivienSummat.add(summa);
+        }
+        return rivienSummat;
     }
 
     public ArrayList<Integer> sarakkeidenSummat() {
-        return new ArrayList<>();
+        ArrayList<Integer> sarakkaidenSummat = new ArrayList<>();
+        
+        for (int rivi = 0; rivi < nelio.length; rivi++) {
+            int summa = 0;
+            for (int sarake = 0; sarake < nelio.length; sarake++) {
+                summa += nelio[sarake][rivi];
+            }
+            sarakkaidenSummat.add(summa);
+        }
+        return sarakkaidenSummat;
     }
 
     public ArrayList<Integer> lavistajienSummat() {
-        return new ArrayList<>();
+        ArrayList<Integer> lavistajienummat = new ArrayList<>();
+
+        int summaVasen = 0;
+        int summaOikea = 0;
+        for (int rivi = 0; rivi < nelio.length; rivi++) {
+            for (int sarake = 0; sarake < nelio.length; sarake++) {
+                
+                if (rivi == sarake) {
+                    summaVasen += nelio[rivi][sarake];
+                }
+                if (rivi + sarake == (nelio.length - 1)) {
+                    summaOikea += nelio[rivi][sarake];
+                }
+            }
+        }
+
+        lavistajienummat.add(summaVasen);
+        lavistajienummat.add(summaOikea);
+
+        return lavistajienummat;
     }
 
     // valmiit apumetodit -- älä koske näihin
@@ -68,7 +106,7 @@ public class Taikanelio {
         }
 
         for (int i = 1; i < summat.size(); i++) {
-            if (summat.get(i - 1) != summat.get(i)) {
+            if (!Objects.equals(summat.get(i - 1), summat.get(i))) {
                 return false;
             }
         }
@@ -103,11 +141,10 @@ public class Taikanelio {
     @Override
     public String toString() {
         StringBuilder palautus = new StringBuilder();
-        for (int rivi = 0; rivi < nelio.length; rivi++) {
-            for (int sarake = 0; sarake < nelio[rivi].length; sarake++) {
-                palautus.append(nelio[rivi][sarake]).append("\t");
+        for (int[] nelio1 : nelio) {
+            for (int sarake = 0; sarake < nelio1.length; sarake++) {
+                palautus.append(nelio1[sarake]).append("\t");
             }
-
             palautus.append("\n");
         }
 

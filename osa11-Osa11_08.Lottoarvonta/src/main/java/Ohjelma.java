@@ -8,9 +8,9 @@ public class Ohjelma {
         ArrayList<Integer> lottonumerot = rivi.numerot();
 
         System.out.println("Lottonumerot:");
-        for (Integer numero : lottonumerot) {
+        lottonumerot.forEach((numero) -> {
             System.out.print(numero + " ");
-        }
+        });
         System.out.println("");
     }
 }
